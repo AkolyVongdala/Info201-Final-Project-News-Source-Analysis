@@ -1,4 +1,4 @@
-source("server.R")
+
 
 shinyUI(fluidPage(
   titlePanel("News Source Analysis"),
