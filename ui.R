@@ -15,8 +15,11 @@ shinyUI(fluidPage(
                                          column(7, img(src = "facebook-photo.JPG", width = 700)))
                        ),
               tabPanel("Factualness and Popularity", sidebarLayout(
-                sidebarPanel("Side"),
-                mainPanel("Main")                
+                sidebarPanel("Controls", radioButtons("popularity.radio", label = "Select Popularity Type:", 
+                                                      choices = c("Shares" = "share_count",
+                                                                  "Reactions" = "reaction_count",
+                                                                  "Comments" = "comment_count"))),
+                mainPanel(plotOutput("popularity.plot"))                
               )),
               tabPanel("Mainstream vs Hyperpartisan", sidebarLayout(
                 sidebarPanel("Side"),
