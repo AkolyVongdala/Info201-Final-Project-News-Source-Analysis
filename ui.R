@@ -1,33 +1,55 @@
+library("shiny")
 
+my.ui <- fluidPage(
+  titlePanel("Country Carbon Emission Values"),
+  sidebarLayout(
+    # layout the page in two columns
+    sidebarPanel(
+      # specify content for the "sidebar" column
+      # dropdown menu for year selection
+      textOutput("In the first section, we look into the truth ratings of articles based off different news categories (Mainstream, Left, or Right.) With this data, we can see whether hyper-partisan effects the truthfulness of the articles posted. This can inform individuals on whether they should continue or be wary of news sources that fall under these categories, especially when browsing news on Facebook. 
 
-shinyUI(fluidPage(
-  titlePanel("News Source Analysis"),
-  tabsetPanel(type = "tabs",
-              tabPanel("About", h2("Data Set Description: BuzzFeed News 2016 Facebook Fact Check"),
-                       fluidRow(column(5, p("The dataset we are considering for this project has reviews of more than 1,000 Facebook posts from six large hyperpartisan and mainstream Facebook pages during the 2016 presidential election. Other information this data set contains about these posts are: the type of media it was (video, photo, link, etc.), how many comments/shares/reactions the post got, and how trustworthy the article was (based off established fact-checkers Facebook hired.) With this dataset, we can analyze how Facebook users react to different types of news information and how Facebook could have caused misinformation among its users regarding information surrounding the election. "),
-                                       a(href = "https://github.com/BuzzFeedNews/2016-10-facebook-fact-check/blob/master/data/facebook-fact-check.csv", "This dataset"), "was provided by buzzfeed.",
-                                       "It contains the data and analysis for the BuzzFeed News article, \"Hyperpartisan Facebook Pages Are Publishing False And Misleading Information At An Alarming Rate,\" published October 20, 2016. Although this article contains manipulations of the data into visualizations, we believe we can created more impressive visualizations to making conclusions from.",
-                                       h3("Guide in which each post was reviewed:"),
-                                       p(em("Mostly True:"), " The post and any related link or image are based on factual information and portray it accurately. Did not misrepresent events, numbers, quotes, reactions, etc., or make information up."),
-                                       p(em("Mixture of True and False:")," Some elements of the information are factually accurate, but some elements or claims are not. This rating should be used when speculation or unfounded claims are mixed with real events, numbers, quotes, etc."),
-                                       p(em("Mostly False:"), " Most or all of the information in the post or in the link being shared is inaccurate. This should also be used when the central claim being made is false."),
-                                       p(em("No Factual Content:")), " This rating is used for posts that are pure opinion, comics, satire, or any other posts that do not make a factual claim. This is also the category to use for posts that are of the \"Like this if you think...\" variety."), 
-                                         column(7, img(src = "facebook-photo.JPG", width = 700)))
-                       ),
-              tabPanel("Factualness and Popularity", sidebarLayout(
-                sidebarPanel("Controls", radioButtons("popularity.radio", label = "Select Popularity Type:", 
-                                                      choices = c("Shares" = "share_count",
-                                                                  "Reactions" = "reaction_count",
-                                                                  "Comments" = "comment_count"))),
-                mainPanel(plotOutput("popularity.plot"))                
-              )),
-              tabPanel("Mainstream vs Hyperpartisan", sidebarLayout(
-                sidebarPanel("Side"),
-                mainPanel("Main")                
-              )),
-              tabPanel("Factualness and Media Types", sidebarLayout(
-                sidebarPanel("Side"),
-                mainPanel("Main")                
-              ))
+                 In the second section, individuals can explore truth ratings of articles from different news sources (three from each category above.) This allows individuals to see which sources from different (or all) categories have the most trustworthy information, so they can continue to follow those and move away from content that is mostly false (or even a mixture of try and false.) "),
+      
+      selectInput(
+        "category",
+        "News Categories:",
+        c(
+          'All' = 'all',
+          'Mainstream' = 'mainstream',
+          'Left' = 'left',
+          'Right' = 'right'
+        ),
+        selected = 'All'
+      ),
+      
+      # radio buttons for data type selection
+      # (kt vs. metric tons per capita)
+      radioButtons(
+        "Rating",
+        "Truth Ratings",
+        c(
+          "All" = "all",
+          "No Factual Content" = "no factual content",
+          "Mostly True" = "mostly true",
+          "Mixture of true and false" = "mixture of true and false",
+          "Mostly False" = "mostly false"
+        
+        ),
+        selected = 'all'
+      )
+    ),
+   
+    
+    # displays outputs created from the server
+    # aka the table and the map data, as well as their
+    # descriptions
+    mainPanel(
+      tableOutput('category.table'),
+      plotOutput('newplot'),
+      tableOutput('page.table'),
+      plotOutput('newplottwo')
   )
-))
+    
+  )
+)
