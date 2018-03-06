@@ -9,6 +9,7 @@ library(cowplot)
 data <- read.csv("data/facebook-fact-check.csv", stringsAsFactors = FALSE)
 data.long <- gather(data, key = count_type, value = counts, share_count, reaction_count, comment_count)
 
+
 # Adds a column to data long that is the counts per post
 rows1 <- nrow(dplyr::filter(data.long, Rating == "mixture of true and false"))
 per.post1 <- dplyr::filter(data.long, Rating == "mixture of true and false")$counts / rows1
@@ -148,7 +149,9 @@ shinyServer(function(input, output) {
     paste0("This bar graph shows the different popularity types (", popularity.types(),
            ") against their counts per post in each truthfulness category. This graph can be
            used to determine trends since it is showing the averages ", popularity.types(),
-           " per post. ")
+           " per post. From this graphs it is evident that \"mostly true\" posts are less popular, 
+           they are shared, comment on, and reacted to less. The most popular posts are the ones 
+           that contain \"no factual content\".")
   })
   
 })
