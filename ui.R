@@ -1,7 +1,7 @@
 library("shiny")
 
 my.ui <- fluidPage(
-  titlePanel("Country Carbon Emission Values"),
+  titlePanel("Truth Ratings "),
   sidebarLayout(
     # layout the page in two columns
     sidebarPanel(
@@ -45,11 +45,22 @@ my.ui <- fluidPage(
     # aka the table and the map data, as well as their
     # descriptions
     mainPanel(
-      tableOutput('category.table'),
-      plotOutput('newplot'),
-      tableOutput('page.table'),
-      plotOutput('newplottwo')
+      tabsetPanel(
+        type = "tabs",
+        tabPanel(
+          "Categories Vs. Truth Rating",
+          tableOutput('category.table'),
+          plotOutput('newplot')
+        ),
+        tabPanel(
+          "Pages Vs. Truth Rating",
+          tableOutput('page.table'),
+          plotOutput('newplottwo')
+        )
+  
   )
     
   )
 )
+)
+
