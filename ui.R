@@ -1,6 +1,45 @@
+library(shinydashboard)
+library(shiny)
+source("Server.r")
 
-
-shinyUI(fluidPage(
+shinyUI(dashboardPage(skin = "black",
+  dashboardHeader(title = "News Source Analysis"),
+  dashboardSidebar(sidebarMenu(
+    menuItem("About", tabName = "about"),
+    menuItem("Factualness and Popularity", tabName = "tab1"),
+    menuItem("Mainstream vs Hyperpartisan", tabName = "tab2"),
+    menuItem("Factualness and Media Types", tabName = "tab3")
+  )),
+  dashboardBody(tabItems(
+    tabItem(tabName = "about"),
+    tabItem(tabName = "tab1",
+            fluidRow(
+              box(width = 9, 
+                  h3("Popularity Types & Factualness by Counts"),plotOutput("popularity.plot"), 
+                  textOutput("popularity.text"),
+                  h3("Popularity Types & Factualness by Counts per Post"), plotOutput("popularity.percents"),
+                  textOutput("popularity.per.text"),
+                  h3("Individual Plots for Popularity Types & Factualness"), plotOutput("popularity.grid")),
+              box(title = "Controls", width = 3,  
+                  checkboxGroupInput("popularity.types", label = "Select popularity types to display:", 
+                                    choices = c("Comments" = "comment_count",
+                                                "Reactions" = "reaction_count",
+                                                "Shares" = "share_count")),                             
+                  h3("Question"),
+                  h4("How does the factualness of a post correlate with its popularity?"),
+                  h3("Significance"),
+                  p("This question is significant because if there is a correlation between 
+                    factualness and popularity, the relationship would reveal what people care 
+                    about when finding their news. Popular news gets shared across many 
+                    platforms, is talked about more and becomes more influential. It is 
+                    important to be conscientious of what news is allowed to become influential, 
+                    that is why we need to analyze the factualness of posts with its popularity."))
+            )),
+    tabItem(tabName = "tab2"),
+    tabItem(tabName = "tab3")
+  ))
+))
+(fluidPage(
   titlePanel("News Source Analysis"),
   tabsetPanel(type = "tabs",
               tabPanel("About", h2("Data Set Description: BuzzFeed News 2016 Facebook Fact Check"),
@@ -15,11 +54,25 @@ shinyUI(fluidPage(
                                          column(7, img(src = "facebook-photo.JPG", width = 700)))
                        ),
               tabPanel("Factualness and Popularity", sidebarLayout(
-                sidebarPanel("Controls", radioButtons("popularity.radio", label = "Select Popularity Type:", 
-                                                      choices = c("Shares" = "share_count",
+                sidebarPanel(h3("Controls"),
+                             checkboxGroupInput("popularity.types", label = "Select popularity types to display:", 
+                                                      choices = c("Comments" = "comment_count",
                                                                   "Reactions" = "reaction_count",
-                                                                  "Comments" = "comment_count"))),
-                mainPanel(plotOutput("popularity.plot"))                
+                                                                  "Shares" = "share_count")),                             
+                             h3("Question"),
+                             h4("How does the factualness of a post correlate with its popularity?"),
+                             h3("Significance"),
+                             p("This question is significant because if there is a correlation between 
+                               factualness and popularity, the relationship would reveal what people care 
+                               about when finding their news. Popular news gets shared across many 
+                               platforms, is talked about more and becomes more influential. It is 
+                               important to be conscientious of what news is allowed to become influential, 
+                               that is why we need to analyze the factualness of posts with its popularity.")),
+                mainPanel(h3("Popularity Types & Factualness by Counts"),plotOutput("popularity.plot"), 
+                          textOutput("popularity.text"),
+                          h3("Popularity Types & Factualness by Counts per Post"), plotOutput("popularity.percents"),
+                          textOutput("popularity.per.text"),
+                          h3("Individual Plots for Popularity Types & Factualness"), plotOutput("popularity.grid"))                
               )),
               tabPanel("Mainstream vs Hyperpartisan", sidebarLayout(
                 sidebarPanel("Side"),
@@ -31,3 +84,5 @@ shinyUI(fluidPage(
               ))
   )
 ))
+
+
