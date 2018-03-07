@@ -11,11 +11,11 @@ my.server <- function(input, output) {
     read.csv("data/facebook-fact-check.csv", stringsAsFactors = FALSE)
   
   # creates a reactive data set that filters the data by the user's
-  # inputs on category 
+  # inputs on category
   filtered.category <- reactive({
     rating <- input$Rating
     category <- input$category
-
+    
     if (category != "all") {
       data <- data %>% filter(Category == category)
     }
@@ -117,7 +117,7 @@ my.server <- function(input, output) {
     }
     
     # checks to see if one or all categories have been
-    # selected by the user. calls function above to 
+    # selected by the user. calls function above to
     # create truth rating percentage tables for each
     # category
     if (category != "all") {
@@ -130,8 +130,8 @@ my.server <- function(input, output) {
       table.one <- table.making('mainstream')
       table.two <- table.making('left')
       table.three <- table.making('right')
-      table.one[nrow(table.one) + 1, ] <- table.two
-      table.one[nrow(table.one) + 1, ] <- table.three
+      table.one[nrow(table.one) + 1,] <- table.two
+      table.one[nrow(table.one) + 1,] <- table.three
       rows <-
         c(
           'Percentage of mainstream articles',
@@ -163,7 +163,6 @@ my.server <- function(input, output) {
   # information from in the future, such as the reactive
   # text output
   table.category <- reactive({
-    
     # Again, this function creates a percentage table of
     # ratings for whatever category is passed in
     table.making <- function(category) {
@@ -223,8 +222,8 @@ my.server <- function(input, output) {
     table.one <- table.making('mainstream')
     table.two <- table.making('left')
     table.three <- table.making('right')
-    table.one[nrow(table.one) + 1, ] <- table.two
-    table.one[nrow(table.one) + 1, ] <- table.three
+    table.one[nrow(table.one) + 1,] <- table.two
+    table.one[nrow(table.one) + 1,] <- table.three
     rows <-
       c(
         'Percentage of mainstream articles',
@@ -238,7 +237,7 @@ my.server <- function(input, output) {
     
   })
   
-  # 
+  #
   output$page.table <- renderTable(rownames = TRUE, {
     rating <- input$Rating
     category <- input$category
@@ -317,9 +316,9 @@ my.server <- function(input, output) {
     mainstream.page.two <- table.making("CNN Politics")
     mainstream.page.three <- table.making("Politico")
     
-    mainstream.page.one[nrow(mainstream.page.one) + 1, ] <-
+    mainstream.page.one[nrow(mainstream.page.one) + 1,] <-
       mainstream.page.two
-    mainstream.page.one[nrow(mainstream.page.one) + 1, ] <-
+    mainstream.page.one[nrow(mainstream.page.one) + 1,] <-
       mainstream.page.three
     
     mainstream.rows <-
@@ -330,8 +329,8 @@ my.server <- function(input, output) {
     left.page.two <- table.making("Occupy Democrats")
     left.page.three <- table.making("The Other 98%")
     
-    left.page.one[nrow(left.page.one) + 1, ] <- left.page.two
-    left.page.one[nrow(left.page.one) + 1, ] <- left.page.three
+    left.page.one[nrow(left.page.one) + 1,] <- left.page.two
+    left.page.one[nrow(left.page.one) + 1,] <- left.page.three
     
     left.rows <-
       c("Addicting Info", "Occupy Democrats", "The Other 98%")
@@ -343,8 +342,8 @@ my.server <- function(input, output) {
     right.page.two <- table.making("Freedom Daily")
     right.page.three <- table.making("Right Wing News")
     
-    right.page.one[nrow(right.page.one) + 1, ] <- right.page.two
-    right.page.one[nrow(right.page.one) + 1, ] <- right.page.three
+    right.page.one[nrow(right.page.one) + 1,] <- right.page.two
+    right.page.one[nrow(right.page.one) + 1,] <- right.page.three
     
     right.rows <-
       c("Eagle Rising", "Freedom Daily", "Right Wing News")
@@ -450,9 +449,9 @@ my.server <- function(input, output) {
     mainstream.page.two <- table.making("CNN Politics")
     mainstream.page.three <- table.making("Politico")
     
-    mainstream.page.one[nrow(mainstream.page.one) + 1, ] <-
+    mainstream.page.one[nrow(mainstream.page.one) + 1,] <-
       mainstream.page.two
-    mainstream.page.one[nrow(mainstream.page.one) + 1, ] <-
+    mainstream.page.one[nrow(mainstream.page.one) + 1,] <-
       mainstream.page.three
     
     mainstream.rows <-
@@ -463,8 +462,8 @@ my.server <- function(input, output) {
     left.page.two <- table.making("Occupy Democrats")
     left.page.three <- table.making("The Other 98%")
     
-    left.page.one[nrow(left.page.one) + 1, ] <- left.page.two
-    left.page.one[nrow(left.page.one) + 1, ] <- left.page.three
+    left.page.one[nrow(left.page.one) + 1,] <- left.page.two
+    left.page.one[nrow(left.page.one) + 1,] <- left.page.three
     
     left.rows <-
       c("Addicting Info", "Occupy Democrats", "The Other 98%")
@@ -476,8 +475,8 @@ my.server <- function(input, output) {
     right.page.two <- table.making("Freedom Daily")
     right.page.three <- table.making("Right Wing News")
     
-    right.page.one[nrow(right.page.one) + 1, ] <- right.page.two
-    right.page.one[nrow(right.page.one) + 1, ] <- right.page.three
+    right.page.one[nrow(right.page.one) + 1,] <- right.page.two
+    right.page.one[nrow(right.page.one) + 1,] <- right.page.three
     
     right.rows <-
       c("Eagle Rising", "Freedom Daily", "Right Wing News")
@@ -552,24 +551,40 @@ my.server <- function(input, output) {
         table.category['Percentage of right articles', 'mostly true'],
         "of total truthful content and ",
         table.category['Percentage of right articles', 'mixture of true and false'],
-        "of a mixture of true and false content. This data shows that users should try and aim to look at 
+        "of a mixture of true and false content. This data shows that users should try and aim to look at
         mainstream media on Facebook, as this data has proven that mainstream news includes the most true information from all the different news categories."
       )
-    )
+      )
     
-
+    
   })
   
   output$plottwo.conclusion <- renderText({
     table.page <- table.page()
-    table.page <- table.page %>% arrange(desc('mostly true')) %>% select('mostly true') %>% distinct(1)
-
+    
     return (
-      paste("The top three pages that are the most truthful are ", table.page$mostly.true)
+      paste(
+        "The top three pages that are the most truthful are Politico (",
+        table.page['Politico', 'mostly true'],
+        "), CNN Politics (",
+        table.page['CNN Politics', 'mostly true'],
+      "), and ABC News Politics (",
+      table.page['ABC News Politics', 'mostly true'],
+      "). These all belong to the mainstream news category. The top three pages with the most false content are Right Wing News (",
+      table.page['Right Wing News', 'mostly false'],
+      "), Freedom Daily (",
+      table.page['Freedom Daily', 'mostly false'],
+      "), and Eagle Rising (",
+      table.page['Eagle Rising', 'mostly false'],
+      "). These all belong to the right news category. From this information we can further conclude that Facebook users should
+      focus mostly on mainstream news providers, and avoid right and even left categorical news as this information is mostly false or
+      can contain false information."
+      
     )
-    
-    
-    
-  })
+  )
   
+  
+  
+  })
+
 }
