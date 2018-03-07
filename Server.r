@@ -2,13 +2,14 @@ library(shiny)
 library(ggplot2)
 library(rlang)
 library(rsconnect)
-library(tidyr)
+#library(tidyr)
 library(dplyr)
 library(cowplot)
 
 data <- read.csv("data/facebook-fact-check.csv", stringsAsFactors = FALSE)
 data.long <- gather(data, key = count_type, value = counts, share_count, reaction_count, comment_count)
 
+data.long <- dplyr::filter(data.long, !is.na(counts))
 
 # Adds a column to data long that is the counts per post
 rows1 <- nrow(dplyr::filter(data.long, Rating == "mixture of true and false"))
@@ -149,9 +150,27 @@ shinyServer(function(input, output) {
     paste0("This bar graph shows the different popularity types (", popularity.types(),
            ") against their counts per post in each truthfulness category. This graph can be
            used to determine trends since it is showing the averages ", popularity.types(),
-           " per post. From this graphs it is evident that \"mostly true\" posts are less popular, 
-           they are shared, comment on, and reacted to less. The most popular posts are the ones 
+           " per post. From this graphs it is evident that \"mostly true\" posts are less popular, meaning 
+           that they are shared, comment on, and reacted to less. The most popular posts are the ones 
            that contain \"no factual content\".")
+  })
+  
+  output$popularity.grid.text <- renderText({
+    mix <- sum(dplyr::filter(data.long, Rating == "mixture of true and false")$per.post, na.rm = TRUE) %>%
+      round()
+    mostly.false <- sum(dplyr::filter(data.long, Rating == "mostly false")$per.post, na.rm = TRUE) %>%
+      round()
+    mostly.true <- sum(dplyr::filter(data.long, Rating == "mostly true")$per.post, na.rm = TRUE) %>%
+      round()
+    no <- sum(dplyr::filter(data.long, Rating == "no factual content")$per.post, na.rm = TRUE) %>%
+      round()
+    paste(mix, mostly.false, mostly.true, no)
+    
+  })
+  
+  output$test <- renderTable({
+    mostly.true <- dplyr::filter(data.long, Rating == "mostly true")$counts
+    return(mostly.true)
   })
   
 })
