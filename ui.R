@@ -49,12 +49,23 @@ my.ui <- fluidPage(
         type = "tabs",
         tabPanel(
           "Categories Vs. Truth Rating",
+          h1("Categories Vs. Truth Rating"),
+          p("In the first section, we look into the truth ratings of articles based off different news categories (Mainstream, Left, or Right.) 
+            With this data, we can see whether hyper-partisan effects the truthfulness of the articles posted. This can inform individuals on whether 
+            they should continue or be wary of news sources that fall under these categories, especially when browsing news on Facebook. "),
           tableOutput('category.table'),
+          textOutput('plotone.conclusion'),
           plotOutput('newplot')
         ),
         tabPanel(
           "Pages Vs. Truth Rating",
+          h1("Pages Vs. Truth Rating"),
+          p("In the second section, individuals can explore truth ratings of articles from different news sources (three from each category above.) 
+            This allows individuals to see which sources from different (or all) categories have the most trustworthy information, so they can continue 
+            to follow those and move away from content that is mostly false (or even a mixture of try and false.) "),
           tableOutput('page.table'),
+          textOutput('plottwo.conclusion'),
+          
           plotOutput('newplottwo')
         )
   
