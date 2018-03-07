@@ -7,8 +7,11 @@ library(dplyr)
 library(cowplot)
 
 data <- read.csv("data/facebook-fact-check.csv", stringsAsFactors = FALSE)
+
+# Makes data long, organizes all popularity counts into one column
 data.long <- gather(data, key = count_type, value = counts, share_count, reaction_count, comment_count)
 
+# Removes and data with "NA" count values
 data.long <- dplyr::filter(data.long, !is.na(counts))
 
 # Adds a column to data long that is the counts per post
@@ -32,6 +35,7 @@ data.long$per.post <- c(per.post1, per.post2, per.post3, per.post4)
 
 shinyServer(function(input, output) {
   
+  # Different popularity types to display
   types.to.display <- reactive({
     if (length(input$popularity.types) == 1) {
       data.long <- dplyr::filter(data.long, count_type == input$popularity.types[1])
@@ -44,7 +48,7 @@ shinyServer(function(input, output) {
     return(data.long)
   })
 
-  
+  # Renders popularity plot, shows counts
   output$popularity.plot <- renderPlot({
     data.long <- types.to.display()
     
@@ -57,6 +61,7 @@ shinyServer(function(input, output) {
     return(plot)
   })
   
+  # Renders popularity plot, shows counts per post
   output$popularity.percents <- renderPlot({
     data.long <- types.to.display()
     
@@ -69,6 +74,7 @@ shinyServer(function(input, output) {
     return(plot)
   })  
   
+  # Renders individual plots for popularity types includes both counts and counts per post
   output$popularity.grid <- renderPlot({
     
     comment.data <- dplyr::filter(data.long, count_type == "comment_count")
@@ -124,6 +130,7 @@ shinyServer(function(input, output) {
     return(grid)
   })
   
+  # Reactive text that gets the names of the popularity types that are being displayed
   popularity.types <- reactive({
     length = length(input$popularity.types)
     if (length == 3 || length == 0) {
@@ -136,6 +143,7 @@ shinyServer(function(input, output) {
     return(types)
   })
   
+  # Renders text description for popularity plot of counts
   output$popularity.text <- renderText({
     paste0("This first plot is showing different popularity types (", 
            popularity.types(), ") against their counts in each truthfulness category. While this graph is a
@@ -146,6 +154,7 @@ shinyServer(function(input, output) {
            the next graph looks at the counts of the different popularity types per post.")
   })
   
+  # Renders text description for popularity plot of counts per post
   output$popularity.per.text <- renderText({
     paste0("This bar graph shows the different popularity types (", popularity.types(),
            ") against their counts per post in each truthfulness category. This graph can be
@@ -155,6 +164,8 @@ shinyServer(function(input, output) {
            that contain \"no factual content\".")
   })
   
+  # Text to display the counts per post of the different truthfulness categories
+  # doesn't break into popularity groups, numbers are too high
   output$popularity.grid.text <- renderText({
     mix <- sum(dplyr::filter(data.long, Rating == "mixture of true and false")$per.post, na.rm = TRUE) %>%
       round()
@@ -168,6 +179,7 @@ shinyServer(function(input, output) {
     
   })
   
+  # I was testing with this
   output$test <- renderTable({
     mostly.true <- dplyr::filter(data.long, Rating == "mostly true")$counts
     return(mostly.true)
