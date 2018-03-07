@@ -24,14 +24,7 @@ This dataset was provided by Buzzfeed, https://github.com/BuzzFeedNews/2016-10-f
 ###### Analysis Questions
 **How does the factualness of a post correlate with its popularity?**
 
-  This question is significant because if there is a correlation between factualness and popularity, the relationship would reveal what people care about when finding their news. Popular news gets shared across many platforms, is talked about more and becomes more influential. It is important to be conscientious of what news is allowed to become influential, that is why we need to analyze the factualness of posts with its popularity. When looking at popularity we will analyze both the number of shares and the number of engagements.
-
 **Do “mainstream” news sources post more factual articles than hyperpartisan news sources?**
-
-  It is important to determine if “mainstream” news sources are more factual than hyperpartisan news sources because generally follow news sources with similar political stances as their own. This question is intentionally broad to capture the overall trend of different news sources. But it would also be interesting to analyze specific news sources’ factualness against each other.
-
-  It is important to determine if “mainstream” news sources are more factual than hyperpartisan news sources because generally follow news sources with similar political stances as their own. This question is intentionally broad to capture the overall trend of different news sources. But it would also be interesting to analyze specific news sources’ factualness against each other.
 
 **Are certain media types of posts less factual?**
 
-  It is necessary to know if certain media types of posts tend to be less factual because this information can help people make informed decisions about what news to trust. While this may seem like a small discovery, knowing this would help keep readers more aware when reading news posts. We will also analyze which media types are shared more and how that relates to its factualness.
