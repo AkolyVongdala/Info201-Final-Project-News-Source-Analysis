@@ -10,7 +10,8 @@ This application looks at data from BuzzFeed entitled "BuzzFeed News 2016 Facebo
 The dataset we are considering for this project has reviews of more than 1,000 Facebook posts from six large hyperpartisan and mainstream Facebook pages during the 2016 presidential election. Other information this data set contains about these posts are: the type of media it was (video, photo, link, etc.), how many comments/shares/reactions the post got, and how trustworthy the article was (based off established fact-checkers Facebook hired.) With this dataset, we can analyze how Facebook users react to different types of news information and how Facebook could have caused misinformation among its users regarding information surrounding the election.
 This dataset was provided by Buzzfeed, https://github.com/BuzzFeedNews/2016-10-facebook-fact-check/blob/master/data/facebook-fact-check.csv,  which contains the data and analysis for the BuzzFeed News article, "Hyperpartisan Facebook Pages Are Publishing False And Misleading Information At An Alarming Rate," published October 20, 2016. Although this article contains manipulations of the data into visualizations, we believe we can created more impressive visualizations to making conclusions from.
 
-Guide in which each post was reviewed:
+###### Guide in which each post was reviewed:
+
   **Mostly True:** The post and any related link or image are based on factual information and portray it accurately. Did not misrepresent events, numbers, quotes, reactions, etc., or make information up.
 
   **Mixture of True and False:** Some elements of the information are factually accurate, but some elements or claims are not. This rating should be used when speculation or unfounded claims are mixed with real events, numbers, quotes, etc.
