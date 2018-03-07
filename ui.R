@@ -1,5 +1,3 @@
-
-
 shinyUI(fluidPage(
   titlePanel("News Source Analysis"),
   tabsetPanel(type = "tabs",
@@ -25,9 +23,27 @@ shinyUI(fluidPage(
                 sidebarPanel("Side"),
                 mainPanel("Main")                
               )),
-              tabPanel("Factualness and Media Types", sidebarLayout(
-                sidebarPanel("Side"),
-                mainPanel("Main")                
-              ))
+              
+              
+              # Factualness and media type section (Akoly)
+              tabPanel(h6("Factualness and Media Types"), h2("Are certain media types of posts less factual?"),
+              sidebarLayout(
+                sidebarPanel(
+                  h4("Significance"), 
+                  p("It is necessary to know if certain media types of posts tend to be less factual 
+                     because this information can help people make informed decisions about what news to trust. 
+                     While this may seem like a small discovery, knowing this would help keep readers more aware when 
+                     reading news posts. We will also analyze which media types are shared more and how that relates to its factualness."),
+                  # input: select the PC Vs. KT using radio buttons 
+                  radioButtons("radio.factualness", label = h4("Select the type of media:"), 
+                               choices = list("Video" =  'video', "Link" = 'link', "Photo" = 'photo', "Text" = 'text')),
+                  fluidRow(column(2, verbatimTextOutput("media"))), 
+                  h4("Selected Media Type Trend Summary"),
+                  textOutput("media.text")
+                   ),
+                mainPanel(plotOutput("media.factualness"), 
+                          h5("Graph description"),
+                          textOutput("plot.text"))
+              )
   )
-))
+)))
