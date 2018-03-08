@@ -1,6 +1,6 @@
 library(shinydashboard)
 library(shiny)
-source("server.R")
+source("Server.r")
 
 shinyUI(dashboardPage(skin = "black",
   dashboardHeader(title = "News Source Analysis"),
@@ -20,9 +20,18 @@ shinyUI(dashboardPage(skin = "black",
                             box(width = 12, h1(em("Is this fake news?!?")), background = "navy"))),
             # Information about the data
             fluidRow(box(title = "The Data", status = "primary",
-                         p(a(href = "https://github.com/BuzzFeedNews/2016-10-facebook-fact-check/blob/master/data/facebook-fact-check.csv", "The dataset"), " report looks into BuzzfeedNews data that contains fact-checked reviews of more than 1,000 Facebook posts taken from Facebook pages. This data takes posts made by nine main news source pages on Facebook, each of them falling into news categories of Mainstream, Left, or Right.  These posts were made during the time of the 2016 presidential election. The data also contains information on the post type (video, link, text, or photo) and the number of shares/comments/reacts these posts got. With this report, we were able to analyze and make conclusions in topics related to factualness vs. popularity, factualness vs. news categories, and factualness vs. media type."),
+                         p(a(href = "https://github.com/BuzzFeedNews/2016-10-facebook-fact-check/blob/master/data/facebook-fact-check.csv", "The dataset"), 
+                           " report looks into BuzzfeedNews data that contains fact-checked reviews of more than 
+                           1,000 Facebook posts taken from Facebook pages. This data takes posts made by nine 
+                           main news source pages on Facebook, each of them falling into news categories of 
+                           Mainstream, Left, or Right.  These posts were made during the time of the 2016 
+                           presidential election. The data also contains information on the post type (video, 
+                           link, text, or photo) and the number of shares/comments/reacts these posts got. With 
+                           this report, we were able to analyze and make conclusions on topics related to 
+                           factualness vs. popularity, factualness vs. news categories, and factualness vs. 
+                           media type."),
                          br(),
-                         img(src = "facebook-photo.JPG", width = "100%"),
+                         img(src = "facebook-photo.jpg", width = "100%"),
                          br(), br(),
                          strong("Guide in which each post was reviewed:"),
                          p(em("Mostly True:"), " The post and any related link or image are based on factual 
@@ -39,8 +48,8 @@ shinyUI(dashboardPage(skin = "black",
                            the category to use for posts that are of the \"Like this if you think...\" variety."),
                          strong("More Definitions:"),
                          p(em("Popularity types:"), " There are three different categories which popularity 
-                           is broken into: share counts, reaction counts and comment counts. Each of these 
-                           different counts is used to asses popularity levels of certain posts."),
+                           is broken into: share counts, reaction counts, and comment counts. Each of these 
+                           different counts is used to assess popularity levels of certain posts."),
                          p(em("Mainstream:"), " News sources that don't openly affiliate with a political party."),
                          p(em("Hyperpartisan:"), " News sources that openly affiliate with a political party 
                            and articles relate heavily to what that political party stands for."),
@@ -50,12 +59,12 @@ shinyUI(dashboardPage(skin = "black",
                      box(title = "The Questions", status = "warning",
                          p(strong("Factualness and Popularity: "), "How does the factualness of a post correlate 
                            with its popularity?"),
-                         p(strong("Mainstream verus Hyperpartisan: "), "Do \"mainstream\" news sources post more 
+                         p(strong("Mainstream versus Hyperpartisan: "), "Do \"mainstream\" news sources post more 
                            factual articles than hyperpartisan news sources?"),
                          p(strong("Factualness and Media Types: "), "Are certain media types of posts less factual?")),
                      # The goals of this report
                      box(title = "Goals", status = "warning", 
-                         p("The goal for this data report is to help give users the tools and information they 
+                         p("The goal of this data report is to help give users the tools and information they 
                            need to navigate Facebook's news feed so they can receive news from sources that are 
                            truthful and sincere. Anyone can publish to Facebook, and the information does not 
                            necessarily have to be fact-checked, so it is very easy for false information to float 
@@ -63,7 +72,7 @@ shinyUI(dashboardPage(skin = "black",
                            media types, and post engagement.")),
                      # Target Audience
                      box(title = "User Group", status = "warning",
-                         p("Our user group that we are aiming for are typical Facebook users, especially 
+                         p("The user group that we are aiming for are typical Facebook users, especially 
                            those who use Facebook as a news source in their daily lives. As the", 
                            a("age of misinformation", 
                              href = "https://www.npr.org/sections/thetwo-way/2016/11/19/502692075/misinformation-on-facebook-zuckerberg-lists-ways-of-fighting-fake-news"), 
@@ -88,7 +97,7 @@ shinyUI(dashboardPage(skin = "black",
                   h3("Individual Plots for Popularity Types & Factualness"), plotOutput("popularity.grid"),
                   textOutput("popularity.grid.text")),
                 box(title = "Conclusion", status = "primary", width = 12,
-                    p("Based off the data and visualizations, it is very clear that posts with \"no 
+                    p("Based on the data and visualizations, it is very clear that posts with \"no 
                       factual content\" are the most popular. That is not surprising because posts 
                       on Facebook containing no factual content tend to be for entertainment, which 
                       is a huge portion of what people use Facebook for. Posts that are the least 
@@ -103,16 +112,16 @@ shinyUI(dashboardPage(skin = "black",
                       share count is higher than the other popularity counts. In the \"mostly false\" 
                       category the reaction count has the highest numbers. We believe that this is because 
                       when people share a post, they are saying to all their friends that they completely 
-                      agree with it. People share the nonfactual posts a lot more because its easy to agree 
+                      agree with it. People share the nonfactual posts a lot more because it's easy to agree 
                       with something that isn't political. But when it comes to the mostly false posts, 
                       people share it less than they react to it, because they are more skeptical of its 
                       content and not willing to share with everyone they fully believe it. That being said, 
-                      this speculation is based off of the data, but also our own experience with people and 
+                      this speculation is based on of the data, but also our own experience with people and 
                       people using Facebook."))
                 ),
               # Side bar containing significance of the question and controls
               box(width = 3, status = "warning", title = "Significance", 
-                  p("This question is significant because if there is a correlation between factualness and 
+                  p("This question is significant because if thttps://ashull.shinyapps.io/news-source-analysis/here is a correlation between factualness and 
                     popularity, the relationship would reveal what people care about when finding their news. 
                     Popular news gets shared across many platforms, is talked about more, and becomes more 
                     influential. It is important to be conscientious of what news becomes influential.")),
@@ -132,7 +141,7 @@ shinyUI(dashboardPage(skin = "black",
             fluidRow(column(width = 9, status = "primary", 
                             box(width = 12, h3("Categories Vs. Truth Rating"), status = "primary",
                                 p("In the first section, we look into the truth ratings of articles 
-                                  based off different news categories (Mainstream, Left, or Right.) 
+                                  based on different news categories (Mainstream, Left, or Right.) 
                                   With this data, we can see whether hyper-partisan effects the truthfulness 
                                   of the articles posted. This can inform individuals on whether 
                                   they should continue or be wary of news sources that fall under these 
@@ -151,9 +160,9 @@ shinyUI(dashboardPage(skin = "black",
                                 textOutput('plottwo.conclusion'),
                                 plotOutput('newplottwo')),
                             box(width = 12, title = "Conclusion", status = "primary",
-                                p("Overall, when inspecting these news source categories of these different 
-                                  Facebook new pages, we can conclude that news sources that take a left/right 
-                                  side tend to contain more false information than mainstream news sources. 
+                                p("When inspecting the categories of these different 
+                                  Facebook news pages, we can conclude that news sources that take a left/right 
+                                  stance tend to contain more false information than mainstream news sources. 
                                   The significance of this finding is important as Facebook's current 
                                   algorithm tends to only show its user's content that they typically 
                                   engage in. So if users tend to engage only with news pages that have 
@@ -209,16 +218,16 @@ shinyUI(dashboardPage(skin = "black",
                                 h5("Graph description"),
                                 textOutput("plot.text")),
                             box(width = 12, title = "Conclusion", status = "primary",
-                                p("From the trend analysis of the types of media (texts, photos, links and 
+                                p("From the trend analysis of the types of media (texts, photos, links, and 
                                   videos) and its factualness rating on different facebook posts, we can 
                                   see how each media type and its rating correlates to how different news 
                                   sources use these media types to share different factual information. 
                                   This trend advises users on how each news sources use different media 
-                                  types to their advantages. For example, through this data you can see 
+                                  types to their advantages. For example, through this data, you can see 
                                   that links contribute mostly towards the factualness rating of 'Mostly 
-                                  True'. This is significance because from understanding how each media 
+                                  True'. This is significant because from understanding how each media 
                                   types can hold different factualness rating will help the users to 
-                                  managed their engagement with different types of medias across different 
+                                  manage their engagement with different types of media across different 
                                   news sources."))),
                      # Sidebar containing significance and controls
                      box(width = 3, title = "Significance", status = "warning",

@@ -5,6 +5,7 @@ library(rsconnect)
 library(tidyr)
 library(dplyr)
 library(cowplot)
+library(rsconnect)
 
 data <- read.csv("data/facebook-fact-check.csv", stringsAsFactors = FALSE)
 
@@ -166,13 +167,13 @@ shinyServer(function(input, output) {
     paste0("This bar graph shows the different popularity types (", popularity.types(),
            ") against their counts per post in each truthfulness category. This graph can be
            used to determine trends since it is showing the averages ", popularity.types(),
-           " per post. From this graph it is evident that \"mostly true\" posts are less popular, meaning 
+           " per post. From this graph, it is evident that \"mostly true\" posts are less popular, meaning 
            that they are shared, comment on, and reacted to less. The most popular posts are the ones 
            that contain \"no factual content\".")
   })
 
   output$popularity.grid.text <- renderText({
-    paste("These graphs are displaying all the data shown on the previous two graphs but 
+    paste("These graphs are displaying all the data shown in the previous two graphs but 
           broken down into their individual popularity types.")
   })
   
@@ -710,7 +711,7 @@ shinyServer(function(input, output) {
       paste(
         "The category with the most truthful information was mainstream, with ",
         table.category['Percentage of mainstream articles', 'mostly true'],
-        " of truthful content.
+        " truthful content.
         Mainstream content also had ",
         table.category['Percentage of mainstream articles', 'mostly false'],
         "of total false content and ",
@@ -730,7 +731,7 @@ shinyServer(function(input, output) {
         table.category['Percentage of right articles', 'mixture of true and false'],
         "of a mixture of true and false content. This data shows that users should try and aim to look at
         mainstream media on Facebook, as this data has proven that mainstream news 
-        includes the most true information from all the different news categories."
+        includes the truest information from all the different news categories."
       )
       )
     
@@ -755,7 +756,7 @@ shinyServer(function(input, output) {
         table.page['Freedom Daily', 'mostly false'],
         "), and Eagle Rising (",
         table.page['Eagle Rising', 'mostly false'],
-        "). These all belong to the right news category. From this information we can 
+        "). These all belong to the right news category. From this information, we can 
         further conclude that Facebook users should
         focus mostly on mainstream news providers, and avoid right and even left 
         categorical news as this information is mostly false or
@@ -768,11 +769,11 @@ shinyServer(function(input, output) {
 
   ############## QUESTION 3 CODE #########################
   output$plot.text <- renderText({
-    paste0("This plot is showing the different media types (Link, Video, Photo and Text) against their rating in 
-           each truthfulness category (mostly true, no factual content, mostly false and mixture of true and false). 
+    paste0("This plot is showing the different media types (Link, Video, Photo, and Text) against their rating in 
+           each truthfulness category (mostly true, no factual content, mostly false, and mixture of true and false). 
            While this graph is a good starting point for answering the question, it doesn't allow for thourough
            analysis. For example, this graph does not allow a direct comparison of each media types by its
-           rating of truthfulness category. Though, this graph can be use to determine the 
+           rating of truthfulness category. Though, this graph can be used to determine the 
            trends in the data because there is a relevant relationship between the types of media and the rating.")
   })
   
@@ -802,7 +803,7 @@ shinyServer(function(input, output) {
       percent.of.true <- (nrow(total.mostly.true)/nrow(total.photo))*100
       text <- paste0("The trend of this graph shows that for the media type 'Text', the
                      factualness rating is largely 'Mostly True' (", round(percent.of.true + 50), "%), while the other
-                     factualness rating are closely similar in the lowwer range.")      
+                     factualness rating are closely similar in the lower range.")      
     } else {
       total.link <- data %>% filter(Post.Type == 'link')
       total.mostly.true <- total.link %>% filter(Rating == 'mostly true')
