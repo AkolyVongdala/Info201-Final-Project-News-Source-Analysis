@@ -124,7 +124,7 @@ shinyUI(dashboardPage(skin = "black",
                 ),
               # Side bar containing significance of the question and controls
               box(width = 3, status = "warning", title = "Significance", 
-                  p("This question is significant because if thttps://ashull.shinyapps.io/news-source-analysis/here is a correlation between factualness and 
+                  p("This question is significant because if there is a correlation between factualness and 
                     popularity, the relationship would reveal what people care about when finding their news. 
                     Popular news gets shared across many platforms, is talked about more, and becomes more 
                     influential. It is important to be conscientious of what news becomes influential.")),
