@@ -78,7 +78,10 @@ shinyUI(dashboardPage(skin = "black",
                              href = "https://www.npr.org/sections/thetwo-way/2016/11/19/502692075/misinformation-on-facebook-zuckerberg-lists-ways-of-fighting-fake-news"), 
                            "is upon us, many users are still unaware of the amount of false information that is distributed 
                            on Facebook. We hope to arrive at conclusions that can help these users navigate Facebook to 
-                           ensure they have the tools to understand and seek out news that is truthful and sincere.")))),
+                           ensure they have the tools to understand and seek out news that is truthful and sincere.")),
+                     # QR code for info fair
+                     box(title = "Scan to go to our site!", status = "warning",
+                         column(img(src = "qrcode.jpeg", width = "20%"), align = "center", width = 12)))),
     # Content of Q1 page
     tabItem(tabName = "tab1",
             # Main question
